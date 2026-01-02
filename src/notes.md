@@ -63,21 +63,23 @@ They include **data flow, annotations, validation steps, built-in methods, and b
 
 ### Endpoints
 - `/` → Display registration form
-  ```java
-  model.addAttribute("user", new User());
+
+```java
+model.addAttribute("user", new User());
 ````
 
 * **Purpose:** Bind a `User` object to the form
-* `/register` → Process registration
 
-  ```java
-  @ModelAttribute @Valid User user, BindingResult bindingResult
-  ```
+- `/register` → Process registration
 
-  * `@Valid` → Triggers validation
-  * `BindingResult` → Stores validation errors
-  * **If errors:** Return to registration form
-  * **If valid:** Call `userService.saveUser(user)` → Show success page
+```java
+@ModelAttribute @Valid User user, BindingResult bindingResult
+```
+
+* `@Valid` → Triggers validation
+* `BindingResult` → Stores validation errors
+* **If errors:** Return to registration form
+* **If valid:** Call `userService.saveUser(user)` → Show success page
 
 ---
 
@@ -110,9 +112,10 @@ They include **data flow, annotations, validation steps, built-in methods, and b
 * **Bind field:** `th:field="*{username}"`
 * **Show validation errors:**
 
-  ```html
-  <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
-  ```
+```html
+<div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+```
+
 * **Purpose:** Connect backend `User` object with frontend form
 
 ---
