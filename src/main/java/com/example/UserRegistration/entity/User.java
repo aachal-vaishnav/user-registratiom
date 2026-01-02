@@ -18,7 +18,7 @@ public class User {
     @Size(min = 6, max = 12, message = "Username must be between 6 and 12 characters")
     private String username;
 
-    @NotNull(message = "Email is required")
+    @NotBlank(message = "Email is required")
     @Email(message = "Enter a valid email address")
     private String email;
 
