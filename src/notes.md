@@ -57,6 +57,68 @@ They include **data flow, annotations, validation steps, built-in methods, and b
   - One lowercase letter
   - One number
 
+### Difference: `@NotNull` vs `@NotBlank`
+
+This is a common question in Spring validation. The difference is subtle but important.
+
+---
+
+## 1. `@NotNull`
+
+- **Purpose:** Ensures the field is **not null**.
+- **Works on:** Any object type (`String`, `Integer`, `Date`, etc.)
+- **Limitation:** For a `String`, it **only checks if the value is null**; empty string `""` is allowed.
+
+**Example:**
+
+```java
+@NotNull
+private String username;
+````
+
+| Input  | Pass/Fail |
+| ------ | --------- |
+| null   | Fail      |
+| ""     | Pass      |
+| "John" | Pass      |
+
+---
+
+## 2. `@NotBlank`
+
+* **Purpose:** Ensures the field is **not null AND not empty (after trimming)**.
+* **Works on:** Only `String` fields.
+* **Checks:**
+
+  * Null value
+  * Empty string `""`
+  * String with only spaces `"   "`
+
+**Example:**
+
+```java
+@NotBlank
+private String username;
+```
+
+| Input  | Pass/Fail |
+| ------ | --------- |
+| null   | Fail      |
+| ""     | Fail      |
+| "   "  | Fail      |
+| "John" | Pass      |
+
+---
+
+## ✅ Key Difference
+
+| Feature                | `@NotNull`                 | `@NotBlank`        |
+| ---------------------- | -------------------------- | ------------------ |
+| Null value check       | Yes                        | Yes                |
+| Empty string check     | No                         | Yes                |
+| Only works on Strings? | No (works on any object)   | Yes (Strings only) |
+| Common use in forms    | Objects like Integer, Date | User input Strings |
+
 ---
 
 ## 4. Controller: `UserController`
